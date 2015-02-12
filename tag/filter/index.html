@@ -1,0 +1,235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xmlns:fb="http://ogp.me/ns/fb#" xmlns:addthis="http://www.addthis.com/help/api-spec" >
+
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>filter &laquo;  3 Doughnuts</title>
+
+<link rel="stylesheet" href="http://www.3doughnuts.com/wp-content/themes/3dc/style.css" type="text/css" media="screen" />
+<link rel="pingback" href="http://www.3doughnuts.com/xmlrpc.php" />
+
+<!--<style type="text/css" media="screen">
+
+	#page { background: url("http://www.3doughnuts.com/wp-content/themes/3dc/images/kubrickbg-ltr.jpg") repeat-y top; border: none; }
+
+</style>-->
+
+
+<link rel="alternate" type="application/rss+xml" title="3 Doughnuts &raquo; Feed" href="http://www.3doughnuts.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="3 Doughnuts &raquo; Comments Feed" href="http://www.3doughnuts.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="3 Doughnuts &raquo; filter Tag Feed" href="http://www.3doughnuts.com/tag/filter/feed/" />
+<link rel='stylesheet' id='output-css'  href='http://www.3doughnuts.com/wp-content/plugins/addthis/css/output.css?ver=4.1' type='text/css' media='all' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.3doughnuts.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.3doughnuts.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 4.1" />
+</head>
+<body class="archive tag tag-filter tag-13">
+
+<div id="header" role="banner">
+	<div id="headerimg">
+		<h1><a href="http://www.3doughnuts.com/">3 Doughnuts</a></h1>
+		<div class="description">A Blog On Web Technologies And The Snacks That Power Them!</div>
+	</div>
+</div>
+<hr />
+
+<div id="page" class="clearfix">
+	<div id="content" class="narrowcolumn" role="main">
+
+		
+ 	   	  		<h2 class="pagetitle">Posts Tagged &#8216;filter&#8217;</h2>
+ 	  
+
+		<div class="navigation">
+			<div class="alignleft"></div>
+			<div class="alignright"></div>
+		</div>
+
+				<div class="post-3 post type-post status-publish format-standard hentry category-css tag-alpha-transparency tag-css tag-css3 tag-filter tag-gecko tag-ie tag-opera tag-rgba tag-trident tag-w3c tag-webkit">
+				<h3 id="post-3"><a href="http://www.3doughnuts.com/2009/06/css-3-rgba-colour-support/" rel="bookmark" title="Permanent Link to CSS 3 RGBa Colour Support">CSS 3 RGBa Colour Support</a></h3>
+				<small>Tuesday, June 23rd, 2009</small>
+
+				<div class="entry">
+					<p>Developers have long been using PNGs to create semi-transparent backgrounds showing content through from underneath.  There are, however, a number of disadvantages to this technique.  It causes another HTTP request to the server, sometimes causing the page to be, momentarily, unreadable if the background colour does not work well with the text colour and, of course, IE6&#8217;s lack of native support for semi-transparency in PNG24 or PNG8.</p>
+<p>CSS 3 introduces RGBa colours, which enable alpha transparency in any rule which usually accepts an RGB colour and simply extends the same syntax.  Currently a solid red background would be set:</p>
+<p><code>background-color:rbg(255,0,0);</code></p>
+<p>This can now be given an alpha transparency by defining the colour as rgba and simply adding an opacity value on to the end:</p>
+<p><code>background-color:rbga(255,0,0,0.8);</code></p>
+<p>The above gives a solid red background with 80% opacity.  If you&#8217;re using a browser with CSS 3 RGBa support, you&#8217;ll be able to see an example below set against a black and white background.</p>
+<style type="text/css">
+.black {
+background-color:rgb(0,0,0);
+}
+.red	{
+background-color:rgba(255,0,0,0.8);
+}
+</style>
+<div class="black" style="width:300px; height:150px;">
+<div class="red" style="position:relative; left:150px; width:300px; height:150px;">
+</div>
+</div>
+<p><code><br />
+&lt;style type="text/css"&gt;<br />
+.black {<br />
+background-color:rgb(0,0,0);<br />
+}<br />
+.red	{<br />
+background-color:rgba(255,0,0,0.8);<br />
+}<br />
+&lt;/style&gt;<br />
+&lt;div class="black" style="width:300px; height:150px;"&gt;<br />
+&lt;div class="red" style="position:relative; left:150px; width:300px; height:150px;"&gt;<br />
+&lt;/div&gt;<br />
+&lt;/div&gt;<br />
+</code></p>
+<h3>Browser Support</h3>
+<p>Firefox and Safari introduced support for RGBa colours with version 3, both of which are relatively mature in the market.  Opera has added support in version 10, which is currently in beta, and, being based on webkit, Chrome has had support from the word go.</p>
+<p>Notably absent from the party is Internet Explorer, so is all this effort wasted if we still need to provide the old semi-transparent PNG in order for large swathes of our users to see all this swishy transparency?</p>
+<p>Luckily for us, IE supports a proprietary filter which we can use as a workaround to give an identical effect and has done since version 6!  The gradient filter requires a start and end colour in RGBa hex format.  By using the same colour as a start and end, we can create a solid background with the semi-transparency preserved:</p>
+<p><code>filter:progid:DXImageTransform.Microsoft.Gradient(startColorStr=#ccff0000,endColorStr=#ccff0000);</code></p>
+<p>As you can see from the example, one thing to note here is that alpha value here comes first.  If you&#8217;re view this in IE, you should be able to see my <span style="text-decoration: line-through;">beautiful</span> example below</p>
+<style type="text/css">
+.black2 {
+background-color:rgb(0,0,0);
+}
+.red2	{
+background-color:rgba(255,0,0,0.8);
+}
+</style>
+<div class="black2" style="width:300px; height:150px;">
+<div class="red2" style="position:relative; left:150px; width:300px; height:150px; filter:progid:DXImageTransform.Microsoft.Gradient(startColorStr=#ccff0000,endColorStr=#ccff0000);">
+</div>
+</div>
+<p><code><br />
+&lt;style type="text/css"&gt;<br />
+.black {<br />
+background-color:rgb(0,0,0);<br />
+}<br />
+.red	{<br />
+background-color:rgba(255,0,0,0.8);<br />
+}<br />
+&lt;/style&gt;<br />
+&lt;!--[IF IE]&gt;<br />
+&lt;style type="text/css"&gt;<br />
+.red	{<br />
+filter:progid:DXImageTransform.Microsoft.Gradient(startColorStr=#ccff0000,endColorStr=#ccff0000);<br />
+}<br />
+&lt;style&gt;<br />
+&lt;![ENDIF]--&gt;<br />
+&lt;div class="black" style="width:300px; height:150px;"&gt;<br />
+&lt;div class="red" style="position:relative; left:150px; width:300px; height:150px;"&gt;<br />
+&lt;/div&gt;<br />
+&lt;/div&gt;<br />
+</code></p>
+<h3>The End of 1&#215;1 transparent PNGs?</h3>
+<p>So, does this mean we can finally implement semi-transparent backgrounds to our content without those pesky PNGs?  As always, it all depends on the browser share and needs of your individual site, but according to <a href="http://marketshare.hitslink.com/browser-market-share.aspx?qprid=2&amp;qpmr=40&amp;qpdt=1&amp;qpct=3&amp;qpcal=1&amp;qptimeframe=M&amp;qpsp=124&amp;qpnp=1">Net Applications report from May 2009</a>, over 90% of users are running a browser capable of CSS 3 or filter based RGBa background colours.</p>
+<p>In most situations, a semi-transparent background is used to make text easier to read on a more complex background.  In this case it would usually be acceptable to gracefully degrade those browsers to a solid background colour and forgo the PNG altogether.  Just add an RGB background colour before the RGBa colour and give IE a transparent background as it will use it&#8217;s own filter instead:</p>
+<style type="text/css">
+.black3 {
+background-color:rgb(0,0,0);
+}
+.red3	{
+background-color:rgb(255,0,0);
+background-color:rgba(255,0,0,0.8);
+}
+</style>
+<p><!--[IF IE]></p>
+<style type="text/css">
+div.red3	{
+background:transparent !important;
+filter:progid:DXImageTransform.Microsoft.Gradient(startColorStr=#ccff0000,endColorStr=#ccff0000);
+}
+</style>
+<p><!--< ![ENDIF]--></p>
+<div class="black3" style="width:300px; height:150px;">
+<div class="red3" style="position:relative; left:150px; width:300px; height:150px;">
+</div>
+</div>
+<p><code><br />
+&lt;style type="text/css"&gt;<br />
+.black {<br />
+background-color:rgb(0,0,0);<br />
+}<br />
+.red	{<br />
+background-color:rgb(255,0,0);<br />
+background-color:rgba(255,0,0,0.8);<br />
+}<br />
+&lt;/style&gt;<br />
+&lt;!--[IF IE]&gt;<br />
+&lt;style type="text/css"&gt;<br />
+.red	{<br />
+background-color:transparent;<br />
+filter:progid:DXImageTransform.Microsoft.Gradient(startColorStr=#ccff0000,endColorStr=#ccff0000);<br />
+}<br />
+&lt;style&gt;<br />
+&lt;![ENDIF]--&gt;<br />
+&lt;div class="black" style="width:300px; height:150px;"&gt;<br />
+&lt;div class="red" style="position:relative; left:150px; width:300px; height:150px;"&gt;<br />
+&lt;/div&gt;<br />
+&lt;/div&gt;<br />
+</code></p>
+				</div>
+
+				<p class="postmetadata">Tags: <a href="http://www.3doughnuts.com/tag/alpha-transparency/" rel="tag">alpha transparency</a>, <a href="http://www.3doughnuts.com/tag/css/" rel="tag">CSS</a>, <a href="http://www.3doughnuts.com/tag/css3/" rel="tag">css3</a>, <a href="http://www.3doughnuts.com/tag/filter/" rel="tag">filter</a>, <a href="http://www.3doughnuts.com/tag/gecko/" rel="tag">gecko</a>, <a href="http://www.3doughnuts.com/tag/ie/" rel="tag">ie</a>, <a href="http://www.3doughnuts.com/tag/opera/" rel="tag">opera</a>, <a href="http://www.3doughnuts.com/tag/rgba/" rel="tag">RGBa</a>, <a href="http://www.3doughnuts.com/tag/trident/" rel="tag">trident</a>, <a href="http://www.3doughnuts.com/tag/w3c/" rel="tag">w3c</a>, <a href="http://www.3doughnuts.com/tag/webkit/" rel="tag">webkit</a><br /> Posted in <a href="http://www.3doughnuts.com/category/css/" rel="category tag">CSS</a> |   <span>Comments Off</span></p>
+
+			</div>
+
+		
+		<div class="navigation">
+			<div class="alignleft"></div>
+			<div class="alignright"></div>
+		</div>
+	
+	</div>
+
+	<div id="sidebar" role="complementary">
+		<ul>
+			<li id="archives-3" class="widget widget_archive"><h2 class="widgettitle">Archives</h2>		<ul>
+	<li><a href='http://www.3doughnuts.com/2010/06/'>June 2010</a></li>
+	<li><a href='http://www.3doughnuts.com/2009/07/'>July 2009</a></li>
+	<li><a href='http://www.3doughnuts.com/2009/06/'>June 2009</a></li>
+		</ul>
+</li><li id="categories-3" class="widget widget_categories"><h2 class="widgettitle">Categories</h2>		<ul>
+	<li class="cat-item cat-item-3"><a href="http://www.3doughnuts.com/category/css/" title="CSS">CSS</a>
+</li>
+	<li class="cat-item cat-item-15"><a href="http://www.3doughnuts.com/category/e-commerce/" >e-Commerce</a>
+</li>
+	<li class="cat-item cat-item-23"><a href="http://www.3doughnuts.com/category/css/hacks-css/" >Hacks</a>
+</li>
+	<li class="cat-item cat-item-19"><a href="http://www.3doughnuts.com/category/internet-explorer/" >Internet Explorer</a>
+</li>
+		</ul>
+</li>		</ul>
+	</div>
+
+
+</div>
+
+<hr />
+<div id="footer" role="contentinfo">
+
+	<p>
+		3 Doughnuts is proudly powered by
+		<a href="http://wordpress.org/">WordPress</a>
+		<br /><a href="http://www.3doughnuts.com/feed/">Entries (RSS)</a>
+		and <a href="http://www.3doughnuts.com/comments/feed/">Comments (RSS)</a>.
+		<!-- 22 queries. 0.233 seconds. -->
+	</p>
+</div>
+
+		<script type="text/javascript">
+
+var addthis_config = {"data_track_clickback":true,"data_track_addressbar":false,"data_track_textcopy":false,"ui_language":"en","ui_atversion":"300","ui_cobrand":"3 Doughnuts"};
+var addthis_product = 'wpp-4.0.3';
+</script><script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=renyard"></script><!--wp_footer--><script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-10033557-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+</html>

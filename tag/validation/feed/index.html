@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>3 Doughnuts &#187; validation</title>
+	<atom:link href="http://www.3doughnuts.com/tag/validation/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.3doughnuts.com</link>
+	<description>A Blog On Web Technologies And The Snacks That Power Them!</description>
+	<lastBuildDate>Thu, 12 Feb 2015 20:24:40 +0000</lastBuildDate>
+	<language>en-GB</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.1</generator>
+	<item>
+		<title>The Case Against IE Specific Stylesheets</title>
+		<link>http://www.3doughnuts.com/2010/06/the-case-against-ie-specific-stylesheets/</link>
+		<comments>http://www.3doughnuts.com/2010/06/the-case-against-ie-specific-stylesheets/#comments</comments>
+		<pubDate>Wed, 30 Jun 2010 08:11:34 +0000</pubDate>
+		<dc:creator><![CDATA[Renyard]]></dc:creator>
+				<category><![CDATA[CSS]]></category>
+		<category><![CDATA[Hacks]]></category>
+		<category><![CDATA[hacks]]></category>
+		<category><![CDATA[Internet Explorer]]></category>
+		<category><![CDATA[trident]]></category>
+		<category><![CDATA[validation]]></category>
+		<category><![CDATA[w3c]]></category>
+
+		<guid isPermaLink="false">http://www.3doughnuts.com/?p=180</guid>
+		<description><![CDATA[In all but the most basic of web site designs developers will invariably encounter situations where Internet Explorer requires a good kick in the CSS before it’ll render the page in the desired way. Often, a quick fix is applied in the shape of an IE specific external stylesheet, hidden from other browsers with conditional [&#8230;]]]></description>
+				<content:encoded><![CDATA[<p>In all but the most basic of web site designs developers will invariably encounter situations where Internet Explorer requires a good kick in the CSS before it’ll render the page in the desired way.  Often, a quick fix is applied in the shape of an IE specific external stylesheet, hidden from other browsers with conditional comments:</p>
+<p><code>&lt;!--[if IE]&gt;&lt;link href="ie.css" type="text/css" rel="stylesheet" /&gt;&lt;![endif]--&gt;</code></p>
+<p>This does the job, but there are a number of down sides to this approach, which in my opinion, make it the wrong choice in many circumstances for both user experience and code maintainability.</p>
+<p>The main reasons for using conditional stylesheets are to avoid CSS hacks and create a smaller code footprint for standards compliant browsers.  But are these really problems that need fixing?</p>
+<h3>Validation</h3>
+<p>HTML validation is good practice, mainly due to a loss in semantic meaning as well as the lack of consistency with regard to error handling in the standards and implementations.  However, CSS is purely presentational and does not convey any semantic meaning.  Furthermore, the original CSS standard defines strict parsing rules which dictate exactly how to deal with invalid rules.  Well tested and widely used hacks such as the * and _ hacks are extremely unlikely to cause problems in standards compliant browsers.</p>
+<p>Invalid CSS hidden from modern browsers and the validator is still just that &#8211; invalid CSS.  Hiding invalid code within conditional comments does not make it valid, it merely prevents subsets of the code from being validated.</p>
+<h3>Performance</h3>
+<p>While standards compliant browsers will be spared the IE specific rules in conditional stylesheets, Internet Explorer users will incur code bloat, in the shape of duplicated selectors, as well as an extra HTTP request.  This extra request may also delay the loading of other resources on the page as IE7 and below will only download 2 resources in parallel (<a href="http://support.microsoft.com/kb/282402">http://support.microsoft.com/kb/282402</a>).</p>
+<p>If these hacks are included in the main stylesheet, standards compliant browsers will take a small hit in terms of download size, but with a bit of care this should be negligible.  However, Internet Explorer users, the majority for most sites, will see a small benefit.</p>
+<h3>Maintainability</h3>
+<p>For the developer, IE specific stylesheets can cause issues when trying to trace the origin of CSS rules applied to a particular element. I tend to use Chrome&#8217;s developer tools to quickly trace the rule back to file and line number, but this method quickly leads to a wild goose chase when IE specific styles come into play. Including IE specific rules side by side with other rules makes it immediatly obvious where they are used and enables the use of any dev tool, such as Chrome or Firebug&#8217;s DOM inspector, to trace the origin of a particular rule.  I also use comments to make it even clearer what rule the hack is emulating as below:</p>
+<p><code>#container {<br />
+min-height:150px;<br />
+/*min*/_height:150px;<br />
+}</code></p>
+<p>After dropping IE specific stylesheets in favour of the * and _ hacks for my last few projects, I see fewer and fewer compelling reasons to go back to the so called good practice of IE specific styles.  In fact, I find IE specific stylesheets encourage bad practice &#8211; when faced with a rather empty looking, I am tempted to add a quick hack to it rather than tackle the real problem!</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.3doughnuts.com/2010/06/the-case-against-ie-specific-stylesheets/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>

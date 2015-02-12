@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xmlns:fb="http://ogp.me/ns/fb#" xmlns:addthis="http://www.addthis.com/help/api-spec" >
+
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>The Case Against IE Specific Stylesheets &laquo;  3 Doughnuts</title>
+
+<link rel="stylesheet" href="http://www.3doughnuts.com/wp-content/themes/3dc/style.css" type="text/css" media="screen" />
+<link rel="pingback" href="http://www.3doughnuts.com/xmlrpc.php" />
+
+<!--<style type="text/css" media="screen">
+
+	#page { background: url("http://www.3doughnuts.com/wp-content/themes/3dc/images/kubrickbgwide.jpg") repeat-y top; border: none; }
+
+</style>-->
+
+
+<link rel="alternate" type="application/rss+xml" title="3 Doughnuts &raquo; Feed" href="http://www.3doughnuts.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="3 Doughnuts &raquo; Comments Feed" href="http://www.3doughnuts.com/comments/feed/" />
+<link rel='stylesheet' id='output-css'  href='http://www.3doughnuts.com/wp-content/plugins/addthis/css/output.css?ver=4.1' type='text/css' media='all' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.3doughnuts.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.3doughnuts.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='In Defense of IE6' href='http://www.3doughnuts.com/2009/07/in-defense-of-ie6/' />
+<meta name="generator" content="WordPress 4.1" />
+<link rel='canonical' href='http://www.3doughnuts.com/2010/06/the-case-against-ie-specific-stylesheets/' />
+<link rel='shortlink' href='http://www.3doughnuts.com/?p=180' />
+</head>
+<body class="single single-post postid-180 single-format-standard">
+
+<div id="header" role="banner">
+	<div id="headerimg">
+		<h1><a href="http://www.3doughnuts.com/">3 Doughnuts</a></h1>
+		<div class="description">A Blog On Web Technologies And The Snacks That Power Them!</div>
+	</div>
+</div>
+<hr />
+
+<div id="page" class="clearfix">
+	<div id="content" class="widecolumn" role="main">
+
+	
+		<div class="navigation">
+			<div class="alignleft">&laquo; <a href="http://www.3doughnuts.com/2009/07/in-defense-of-ie6/" rel="prev">In Defense of IE6</a></div>
+			<div class="alignright"></div>
+		</div>
+
+		<div class="post-180 post type-post status-publish format-standard hentry category-css category-hacks-css tag-css tag-hacks tag-internet-explorer tag-trident tag-validation tag-w3c" id="post-180">
+			<h2>The Case Against IE Specific Stylesheets</h2>
+
+			<div class="entry">
+				<p>In all but the most basic of web site designs developers will invariably encounter situations where Internet Explorer requires a good kick in the CSS before it’ll render the page in the desired way.  Often, a quick fix is applied in the shape of an IE specific external stylesheet, hidden from other browsers with conditional comments:</p>
+<p><code>&lt;!--[if IE]&gt;&lt;link href="ie.css" type="text/css" rel="stylesheet" /&gt;&lt;![endif]--&gt;</code></p>
+<p>This does the job, but there are a number of down sides to this approach, which in my opinion, make it the wrong choice in many circumstances for both user experience and code maintainability.</p>
+<p>The main reasons for using conditional stylesheets are to avoid CSS hacks and create a smaller code footprint for standards compliant browsers.  But are these really problems that need fixing?</p>
+<h3>Validation</h3>
+<p>HTML validation is good practice, mainly due to a loss in semantic meaning as well as the lack of consistency with regard to error handling in the standards and implementations.  However, CSS is purely presentational and does not convey any semantic meaning.  Furthermore, the original CSS standard defines strict parsing rules which dictate exactly how to deal with invalid rules.  Well tested and widely used hacks such as the * and _ hacks are extremely unlikely to cause problems in standards compliant browsers.</p>
+<p>Invalid CSS hidden from modern browsers and the validator is still just that &#8211; invalid CSS.  Hiding invalid code within conditional comments does not make it valid, it merely prevents subsets of the code from being validated.</p>
+<h3>Performance</h3>
+<p>While standards compliant browsers will be spared the IE specific rules in conditional stylesheets, Internet Explorer users will incur code bloat, in the shape of duplicated selectors, as well as an extra HTTP request.  This extra request may also delay the loading of other resources on the page as IE7 and below will only download 2 resources in parallel (<a href="http://support.microsoft.com/kb/282402">http://support.microsoft.com/kb/282402</a>).</p>
+<p>If these hacks are included in the main stylesheet, standards compliant browsers will take a small hit in terms of download size, but with a bit of care this should be negligible.  However, Internet Explorer users, the majority for most sites, will see a small benefit.</p>
+<h3>Maintainability</h3>
+<p>For the developer, IE specific stylesheets can cause issues when trying to trace the origin of CSS rules applied to a particular element. I tend to use Chrome&#8217;s developer tools to quickly trace the rule back to file and line number, but this method quickly leads to a wild goose chase when IE specific styles come into play. Including IE specific rules side by side with other rules makes it immediatly obvious where they are used and enables the use of any dev tool, such as Chrome or Firebug&#8217;s DOM inspector, to trace the origin of a particular rule.  I also use comments to make it even clearer what rule the hack is emulating as below:</p>
+<p><code>#container {<br />
+min-height:150px;<br />
+/*min*/_height:150px;<br />
+}</code></p>
+<p>After dropping IE specific stylesheets in favour of the * and _ hacks for my last few projects, I see fewer and fewer compelling reasons to go back to the so called good practice of IE specific styles.  In fact, I find IE specific stylesheets encourage bad practice &#8211; when faced with a rather empty looking, I am tempted to add a quick hack to it rather than tackle the real problem!</p>
+<div><a class="addthis_button" href="//addthis.com/bookmark.php?v=300" addthis:url='http://www.3doughnuts.com/2010/06/the-case-against-ie-specific-stylesheets/' addthis:title='The Case Against IE Specific Stylesheets '><img src="//cache.addthis.com/cachefly/static/btn/v2/lg-share-en.gif" width="125" height="16" alt="Bookmark and Share" style="border:0"/></a></div>
+								<p>Tags: <a href="http://www.3doughnuts.com/tag/css/" rel="tag">CSS</a>, <a href="http://www.3doughnuts.com/tag/hacks/" rel="tag">hacks</a>, <a href="http://www.3doughnuts.com/tag/internet-explorer/" rel="tag">Internet Explorer</a>, <a href="http://www.3doughnuts.com/tag/trident/" rel="tag">trident</a>, <a href="http://www.3doughnuts.com/tag/validation/" rel="tag">validation</a>, <a href="http://www.3doughnuts.com/tag/w3c/" rel="tag">w3c</a></p>
+				<p class="postmetadata alt">
+					<small>
+						This entry was posted
+												on Wednesday, June 30th, 2010 at 9:11 am						and is filed under <a href="http://www.3doughnuts.com/category/css/" rel="category tag">CSS</a>, <a href="http://www.3doughnuts.com/category/css/hacks-css/" rel="category tag">Hacks</a>.
+						You can follow any responses to this entry through the <a href='http://www.3doughnuts.com/2010/06/the-case-against-ie-specific-stylesheets/feed/'>RSS 2.0</a> feed.
+
+													Both comments and pings are currently closed.
+
+						
+					</small>
+				</p>
+
+			</div>
+		</div>
+
+	
+<!-- You can start editing here. -->
+
+
+			<!-- If comments are closed. -->
+		<p class="nocomments">Comments are closed.</p>
+
+	
+
+
+	
+	</div>
+
+</div>
+
+<hr />
+<div id="footer" role="contentinfo">
+
+	<p>
+		3 Doughnuts is proudly powered by
+		<a href="http://wordpress.org/">WordPress</a>
+		<br /><a href="http://www.3doughnuts.com/feed/">Entries (RSS)</a>
+		and <a href="http://www.3doughnuts.com/comments/feed/">Comments (RSS)</a>.
+		<!-- 19 queries. 0.237 seconds. -->
+	</p>
+</div>
+
+		<script type="text/javascript">
+
+var addthis_config = {"data_track_clickback":true,"data_track_addressbar":false,"data_track_textcopy":false,"ui_language":"en","ui_atversion":"300","ui_cobrand":"3 Doughnuts"};
+var addthis_product = 'wpp-4.0.3';
+</script><script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=renyard"></script><script type='text/javascript' src='http://www.3doughnuts.com/wp-includes/js/comment-reply.min.js?ver=4.1'></script>
+<!--wp_footer--><script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-10033557-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+</html>
